@@ -1,0 +1,25 @@
+ul.numbers, ul.stars, li {
+    display:inline-block;
+}
+
+ul.numbers li, ul.stars li {
+    
+    width : 30px;
+    height: 20px;
+    margin: 5px;
+    
+}
+
+div.key ul li {
+    border-radius: 5px;
+}
+ul.numbers li {
+    background-color: aqua;
+    text-align: center;
+}
+
+ul.stars li {
+    background-color: yellow;
+    text-align: center;
+}
+
