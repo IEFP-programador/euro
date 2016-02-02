@@ -1,22 +1,37 @@
 <html>
     <head>
+        <link rel="stylesheet" href="css/euro.css"/>
         <script src="jquery/jquery-2.2.0.min.js"></script>
         <script>
+            // garantir que código apenas é executado
+            // após documento carregado e pronto
             $(document).ready( function () {
+                // atribuir funcionalidade ao botao
+                // via evento de click
                 $("#bGet").click(function () {
                     //alert("obter");
                     //console.log("clicou no botão obter");
+                    
+                    
+                    // url para onde vai ser feito o pedido
                     url = "http://alunos.estg.ipvc.pt/~pmoreira/KEYSERVER/KeyServerJSON.php";
+                    // pedido ajax
                     $.ajax(url, {
-                        dataType : "json",
-                        method : "GET",
-                        success : function (data) {
-                            console.log(data);  
-                            // criar o div
+                        dataType : "json",              // resposta JSON
+                        method : "GET",                 // pedido tipo GET
+                        success : function (data) {     // quando dados recebidos
+                            // console.log(data);  
+                            
+                            // criar o novo div para a chave
                             newdiv = $("<div/>").addClass("key");
+                            // criar listas para numeros e estrelas
                             newuln = $("<ul/>").addClass("numbers");
                             newuls = $("<ul/>").addClass("stars");
+                            
                             // numeros
+                            // para cada numero em data.numbers
+                            // criar um novo li com o numero como conteudo
+                            // e adicionar o li à respetiva lista
                             $.each(data.numbers, function (i,d) {
                                 newli = $("<li/>").html(d);
                                 newuln.append(newli);
@@ -27,8 +42,10 @@
                                 newuls.append($("<li/>").html(d));
                             });
                             
+                            // adicionar as listas ao novo div
                             newdiv.append(newuln);
                             newdiv.append(newuls);
+                            // adicionar o novo div da chave ao div#content
                             $("#content").append(newdiv);
                         }
                     })
