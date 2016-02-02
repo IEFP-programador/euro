@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <script src="jquery/jquery-2.2.0.min.js"></script>
+        <script>
+            $(document).ready( function () {
+                $("#bGet").click(function () {
+                    //alert("obter");
+                    //console.log("clicou no botão obter");
+                    url = "http://alunos.estg.ipvc.pt/~pmoreira/KEYSERVER/KeyServerJSON.php";
+                    $.ajax(url, {
+                        dataType : "json",
+                        method : "GET",
+                        success : function (data) {
+                            console.log(data);  
+                            // criar o div
+                            newdiv = $("<div/>").addClass("key");
+                            newuln = $("<ul/>").addClass("numbers");
+                            newuls = $("<ul/>").addClass("stars");
+                            // numeros
+                            $.each(data.numbers, function (i,d) {
+                                newli = $("<li/>").html(d);
+                                newuln.append(newli);
+                            });
+                            
+                            // estrelas
+                            $.each(data.stars, function (i,d) {
+                                newuls.append($("<li/>").html(d));
+                            });
+                            
+                            newdiv.append(newuln);
+                            newdiv.append(newuls);
+                            $("#content").append(newdiv);
+                        }
+                    })
+                });
+                $("#bClear").click(function () {
+                    alert("limpar");
+                });
+            });
+            
+        </script>
+    </head>
+    <body>
+        <div id="title">
+            <h1> Euromilhões</h1>
+        </div>
+        <div id="control">
+            <button id="bGet">Obter Chave</button>
+            <button id="bClear"> Limpar </button>
+        </div>
+        <div id="content"></div>
+    </body>
+</html>

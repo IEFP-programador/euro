@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <script src="jquery/jquery-1.12.0.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                
+                $("#bola").click(function () {
+                    
+                    url = "http://alunos.estg.ipvc.pt/~pmoreira/KEYSERVER/KeyServerJSON.php";
+                    
+                    $.ajax(url,{
+                        dataType : "json",
+                        method : "GET",
+                        success : function (data) {
+                            novalista = $("<ul/>");
+                            for (i=0; i < data.numbers.length; i++) {
+                                novalista.append($("<li/>").html(data.numbers[i]));
+                            }
+                            $("#mostrador").append(novalista);
+                            novalista = $("<ul/>");
+                            for (i=0; i < data.stars.length; i++) {
+                                novalista.append($("<li/>").html(data.stars[i]));
+                            }
+                            $("#mostrador").append(novalista);
+                            
+                        }
+                    })
+                    
+                });
+                
+                 $("#blimpa").click(function () {
+                    $("#mostrador").empty();
+                });
+            
+            
+                
+                //mybola1 = $("#bola");
+                //mybola2 = document.getElementById("bola");
+                //console.log(mybola1);
+            })
+            
+        </script>
+    </head>
+    <body>
+        <div id="controlador">
+            <button id="bola">mostra chave</button>
+            <button id="blimpa">limpa</button>
+        </div>
+        <div id="mostrador">
+            qualquer coisa
+        </div>
+    </body>
+</html>
